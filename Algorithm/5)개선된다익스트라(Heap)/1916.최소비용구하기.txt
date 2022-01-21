@@ -1,0 +1,38 @@
+import sys
+import heapq
+input = sys.stdin.readline
+INF = int(1e9)
+
+N = int(input())
+M = int(input())
+
+
+graph = [[] for __ in range(N+1)]
+distances = [INF] * (N+1)
+
+for __ in range(M):
+  x,y,z = map(int,input().split())
+  graph[x].append([z,y])
+
+S , F = map(int,input().split())
+
+def go(S,F):
+  heap = []
+  distances[S] = 0
+  heapq.heappush(heap,(0,S))
+
+  while heap:
+    cost, route = heapq.heappop(heap)
+
+    if cost > distances[route]:
+      continue
+
+    for x,y in graph[route]:
+      if distances[y] > cost + x:
+       distances[y] = cost + x
+       heapq.heappush(heap,(cost + x , y))
+ 
+    
+go(S,F)
+
+print(distances[F])

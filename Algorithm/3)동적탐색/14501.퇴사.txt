@@ -1,0 +1,12 @@
+N = int(input())
+pay = [0] * (20)
+schedule = []
+for i in range(N):
+  schedule.append(list(map(int,input().split())))
+
+for i in range(N):
+  pay[i] = max(pay[i-1], pay[i]) 
+  day,money = schedule[i]
+  pay[i+day] = max(pay[i+day], pay[i]+money)
+
+print(max(pay[:N+1]))

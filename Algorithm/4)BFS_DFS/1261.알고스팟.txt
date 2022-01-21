@@ -1,0 +1,35 @@
+from collections import deque
+
+W, H = map(int,input().split())
+
+graph = []
+value = []
+
+for __ in range(H):
+  value.append([float("inf")]*W)
+
+for h in range(H):
+  graph.append(list(map(int,list(input()))))
+
+deq = deque()
+deq.append([0,0])
+value[0][0] = 0
+
+while deq:
+  h,w = deq.popleft()
+  
+  for hi,wi in [[h+1,w],[h-1,w],[h,w+1],[h,w-1]]:
+
+    if hi < 0 or hi >= H or wi < 0 or wi >= W:
+      continue
+
+    if graph[hi][wi] == 1:
+      add = 1
+    else: 
+      add = 0
+    
+    if value[h][w] + add < value[hi][wi]:
+      value[hi][wi] = value[h][w] + add
+      deq.append([hi,wi])
+      
+print(value[-1][-1])

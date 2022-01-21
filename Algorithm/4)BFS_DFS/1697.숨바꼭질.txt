@@ -1,0 +1,20 @@
+from collections import deque
+
+arr = [0]*100010
+move = deque()
+
+start, finish = map(int,input().split())
+move.append(start)
+
+if finish != start:
+
+  while arr[finish] == 0 :
+    X = move.popleft()
+
+    for Xi in [X+1 ,X*2, X-1]:
+
+      if Xi >= 0 and Xi <=100000 and arr[Xi] ==0:
+        arr[Xi] = arr[X]+1
+        move.append(Xi)
+    
+print(arr[finish])

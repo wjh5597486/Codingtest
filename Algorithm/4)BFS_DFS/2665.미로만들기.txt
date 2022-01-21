@@ -1,0 +1,44 @@
+from collections import deque 
+
+
+def go():
+  N = int(input())
+  graph=[]
+
+  for i in range(N):
+    graph.append(list(map(int,input())))
+
+  block=[]
+
+  for i in range(len(graph)):
+    for j in range(len(graph[i])):
+      if graph[i][j] == 0:
+        block.append([i,j])
+
+  que=deque()
+  que.append([0,0])
+  visit = [[float("inf")] * N for _ in range(N)]
+  visit[0][0] = 0
+
+  while que:
+    x,y = que.popleft()  
+
+    for xi, yi in [[x+1,y],[x-1,y],[x,y+1],[x,y-1]]:
+      if xi < 0 or xi >= N or yi < 0 or yi >= N :
+        continue
+      
+      if visit[x][y] >= visit[xi][yi]:
+        continue
+
+      if graph[xi][yi] == 0 :
+        visit[xi][yi] = visit[x][y] + 1
+      else :
+        visit[xi][yi] = visit[x][y]
+      que.append([xi,yi])
+  
+  print(visit[N-1][N-1])
+
+  
+
+go()
+

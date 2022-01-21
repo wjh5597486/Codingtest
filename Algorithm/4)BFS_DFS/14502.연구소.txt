@@ -1,0 +1,45 @@
+import itertools
+import copy
+
+def execute(curArray, virusArray,W,H):
+  
+  while virusArray:
+    h,w = virusArray.pop()
+    
+    for hi,wi in [[h+1,w],[h-1,w],[h,w+1],[h,w-1]]:
+
+      if hi >= H or hi < 0 or wi <0 or wi >= W:
+        continue
+
+      if curArray[hi][wi] != 0:
+        continue
+
+      virusArray.append([hi,wi])
+      curArray[hi][wi] = 2
+  
+  return (len([0 for h in range(H) for w in range(W) if curArray[h][w] == 0]))
+
+H,W = map(int,input().split())
+arr = []
+
+for i in range(H):
+  arr.append(list(map(int,input().split())))
+
+
+
+virusArray = [[h,w] for h in range(H) for w in range(W) if arr[h][w] == 2]
+
+blankArray = [[h,w] for h in range(H) for w in range(W) if arr[h][w] == 0]
+
+nCr = list(itertools.combinations(blankArray, 3))
+result = 0
+
+for a,b,c in nCr:
+  curArray = copy.deepcopy(arr)
+  curArray[a[0]][a[1]] = 1
+  curArray[b[0]][b[1]] = 1
+  curArray[c[0]][c[1]] = 1
+  #curArray = 실행 배열
+  result = max(result, execute(copy.deepcopy(curArray), copy.deepcopy(virusArray),W,H))
+
+print(result)
