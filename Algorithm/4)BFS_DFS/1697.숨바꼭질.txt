@@ -1,9 +1,11 @@
 from collections import deque
 
-arr = [0]*100010
 move = deque()
 
 start, finish = map(int,input().split())
+
+arr = [0]*100010
+
 move.append(start)
 
 if finish != start:
