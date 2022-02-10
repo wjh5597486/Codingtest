@@ -35,7 +35,8 @@ def go(stt, fin):
 
 X = go(1, node1) + go(node1, node2) + go(node2, N-1)
 Y = go(1, node2) + go(node2, node1) + go(node1, N-1)
-X = min(X,Y)
+X = min(X, Y)
+
 if X >= INF:
     print(-1)
 else:
