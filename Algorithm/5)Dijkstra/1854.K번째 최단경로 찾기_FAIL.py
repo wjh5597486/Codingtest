@@ -34,10 +34,15 @@ def go():
                 sumCost[y] = cost + next_cost
                 heapq.heappush(hq, (cost + next_cost, y))
 
-
     for L in short[1::]:
         if len(L) < K:
             print(-1)
         else:
             print(sorted(L)[-1])
+
+
+
 go()
+
+for i in short:
+    print(i)
