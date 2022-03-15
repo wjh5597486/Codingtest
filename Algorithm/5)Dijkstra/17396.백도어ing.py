@@ -9,7 +9,7 @@ G[N-1] = 0
 
 for i in range(M):
     x, y, c = map(int, input().split())
-    if G[y] == 0 and G[x] == 0:
+    if  G[y] == 0 and G[x] == 0:
         graph[x].append([y, c])  # goal, cost
         graph[y].append([x, c])  # goal, cost
 
@@ -23,13 +23,15 @@ result = -1
 
 while hq:
     cost_sum, start = heapq.heappop(hq)
+    if cost_list[start] < cost_sum:
+        continue
     if start == N-1:
         result = cost_list[-1]
         break
-
     for goal, cost in graph[start]:
-        if cost_list[goal] > cost_sum + cost:
-            heapq.heappush(hq, [cost_sum + cost, goal])
-            cost_list[goal] = cost_sum + cost
+        next_sum = cost_sum + cost
+        if cost_list[goal] > next_sum:
+            heapq.heappush(hq, [next_sum, goal])
+            cost_list[goal] = next_sum
 
 print(result)
