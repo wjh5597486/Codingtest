@@ -20,21 +20,21 @@ def solution():
 
 
     text = [text]
+    S = set()
     i = 0
     while i < len(text):
         cur_word = text[i]
+        i += 1
+        if cur_word in S:
+            continue
+        S.add(cur_word)
         next_words = set_list[len(cur_word)+1]
 
         for next_word in next_words:
             if check(cur_word, next_word) is True:
                 text.append(next_word)
 
-        i += 1
     print(text[-1])
-
-
-
-
 
 
 
