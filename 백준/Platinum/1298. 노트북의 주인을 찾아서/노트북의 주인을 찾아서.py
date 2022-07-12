@@ -4,7 +4,7 @@ sys.setrecursionlimit(1_000_000)
 def solution():
     N, M = map(int, input().split())
 
-    N = 200
+    N = 100
 
     G = [[] for i in range(N+1)]
 
@@ -12,7 +12,7 @@ def solution():
         a, b = map(int, sys.stdin.readline().split())
         G[a].append(b)
 
-    M = 20000
+    M = 5000
     job = [-1]*(M+1)
 
     def dfs(idx):
