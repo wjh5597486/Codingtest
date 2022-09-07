@@ -1,14 +1,11 @@
-def solution():
-    s = input()
-    s1 = s[0]
+s = input()
+r = s[0]
 
-    for i in range(1, len(s)):
-        if s1[i-1] < s[i]:
-            s1 = s[i]+s1
+for t in s[1::]:
 
-        else:
-            s1 = s1+s[i]
-    print(s1[::-1])
+    if r[0] < t:
+        r = r + t
 
-if __name__ == "__main__":
-    solution()
+    else:
+        r = t + r
+print(r)
