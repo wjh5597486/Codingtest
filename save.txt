@@ -1,0 +1,21 @@
+import json
+import requests
+def solution():
+
+    url = "https://huqeyhi95c.execute-api.ap-northeast-2.amazonaws.com/prod"
+    headers = {
+        'X-Auth-Token': '7b52dbc5e971e39d0dda9ac135f17b35'
+    }
+    params = {
+        "Content-Type": "application/json",
+        'problem': "1"
+    }
+
+    response_start = requests.post(url + "/start", headers=headers, params=params)
+    # print(response_start)
+    # auth_key = response_start.json()['auth_key']
+    # print(auth_key)
+
+
+if __name__ == '__main__':
+    solution()

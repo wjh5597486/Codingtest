@@ -1,37 +1,23 @@
-import sys
-
-# N = int(sys.stdin.readline())
-# M = sys.stdin.readline()
-
+from collections import deque
 def solution():
-    N = int(input())
-    M = input()
-    G = [[M[0], 1]]
+    inf = float("inf")
+    for round in range(1, 1000):
+        N = int(input())
+        if N == 0:
+            break
+        G = [list(map(int, input().split())) for _ in range(N)]
+        check = [[inf] * N for i in range(N)]
+        dq = deque()
+        dq.append((0, 0, G[0][0]))
+        check[0][0] = G[0][0]
+        while dq:
+            r, c, cnt = dq.popleft()
+            for r2, c2 in [[r-1,c],[r+1,c],[r,c-1],[r,c+1]]:
+                if 0<=r2<N and 0<=c2<N:
+                    if check[r2][c2] > check[r][c] + G[r2][c2]:
+                        dq.append((r2, c2, check[r][c] + G[r2][c2]))
+                        check[r2][c2] = check[r][c] + G[r2][c2]
+        print(f"Problem {round}: {check[-1][-1]}")
 
-    for i in M[1:]:
-        if i == G[-1][0]:
-            G[-1] = [i, G[-1][1]+1]
-        else:
-            G.append([i, 1])
-
-
-    A = set()
-    result = 0
-    for i in range(len(G)):
-        A.add(G[i][0])
-        sum = G[i][1]
-        for j in range(i+1, len(G)):
-
-            A.add(G[j][0])
-            if len(A) > N:
-                A = set()
-                break
-
-            sum += G[j][1]
-        result = max(result, sum)
-
-    print(result)
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     solution()
