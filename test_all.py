@@ -1,15 +1,23 @@
-import argparse
-problem = 4485
+
+
+problem = 1294
+
+
+# 위 problem 에 백준 문제 번호를 넣고 실행 시키면 모든 테스트 케이스 검사됨.
+
+
 import io
 import unittest.mock
 from codingTest import solution
 import sys
 
-# scrolling data
+# crawling data
 import crawling
+
 input_lines, output_lines = crawling.get_input_output(problem=str(problem))
 
 class MyTestCase(unittest.TestCase):
+
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def assert_stdout(self, user_input1, expected_output, mock_stdout):
         sys.stdin = io.StringIO(user_input1)

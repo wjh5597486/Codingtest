@@ -1,6 +1,3 @@
-from itertools import combinations
-import requests
-from api_request import Communicator
 from bs4 import BeautifulSoup
 import requests
 
